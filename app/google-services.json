@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "967372246568",
+    "firebase_url": "https://kebab-nomade.firebaseio.com",
+    "project_id": "kebab-nomade",
+    "storage_bucket": "kebab-nomade.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967372246568:android:ed4d4b60e4c3a3207bef1d",
+        "android_client_info": {
+          "package_name": "com.thoumar.kebabnomade"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967372246568-947gjrpgvu27ftpimfug4dslofprfh70.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thoumar.kebabnomade",
+            "certificate_hash": "d587599b8fa61d6712ebaf8cade2d468759877ff"
+          }
+        },
+        {
+          "client_id": "967372246568-6ut2m8rjn7iushle71uq749t9i0b92jo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcEDmas3qm6iNoNclyJWvJ2KTgxmHDtZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967372246568-6ut2m8rjn7iushle71uq749t9i0b92jo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
