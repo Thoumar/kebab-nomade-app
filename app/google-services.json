@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "967372246568-jbndeu1496hlbp4it8dc50hq33ob6vpb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thoumar.kebabnomade",
+            "certificate_hash": "3cd9142e7f5c285bea4ed510fa17072829e6d29c"
+          }
+        },
+        {
           "client_id": "967372246568-947gjrpgvu27ftpimfug4dslofprfh70.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
