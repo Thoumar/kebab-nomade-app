@@ -24,7 +24,6 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        Glide
 
         v.btn_menu.setOnClickListener {
 
