@@ -13,8 +13,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.thoumar.kebabnomade.R
 
-import kotlinx.android.synthetic.main.activity_main.*
-
 class MainActivity : AppCompatActivity() {
 
     companion object {
@@ -36,8 +34,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_container)
         navView.setupWithNavController(navController)
 
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            //user is logged
+        if (FirebaseAuth.getInstance().currentUser != null) {
             Toast.makeText(this, "Welcome back ", Toast.LENGTH_LONG).show()
         } else {
             showSignInOptions()
