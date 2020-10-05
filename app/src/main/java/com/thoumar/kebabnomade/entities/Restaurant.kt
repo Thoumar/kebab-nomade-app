@@ -52,4 +52,4 @@ data class Restaurant(
     override fun getSnippet(): String? {
         return this.name
     }
-}
+} 
