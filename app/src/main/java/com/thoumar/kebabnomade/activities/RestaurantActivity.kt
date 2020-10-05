@@ -1,25 +1,33 @@
 package com.thoumar.kebabnomade.activities
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.thoumar.kebabnomade.R
+import com.thoumar.kebabnomade.adapters.sauces.SaucesAdapter
 import com.thoumar.kebabnomade.entities.Restaurant
 import kotlinx.android.synthetic.main.activity_restaurant.*
 
 class RestaurantActivity : AppCompatActivity() {
+
+    private lateinit var restaurant: Restaurant
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant)
 
-        val restaurant: Restaurant = intent.getParcelableExtra("RESTAURANT")
+        restaurant = intent.getParcelableExtra("RESTAURANT")
 
         Glide.with(this).load(restaurant.cover).into(image_view_restaurant_cover)
-
-        text_view_restaurant_name.text = restaurant.name
 
         if (!restaurant.description.isNullOrEmpty()) {
             text_view_restaurant_description.text = restaurant.description
@@ -28,9 +36,13 @@ class RestaurantActivity : AppCompatActivity() {
         }
 
         if (!restaurant.sauces.isNullOrEmpty()) {
-            text_view_sauces.text = restaurant.sauces.toString()
-        }
 
+            sauces_recycler_view.apply {
+                layoutManager =
+                    LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
+                adapter = SaucesAdapter(restaurant.sauces)
+            }
+        }
 
         text_view_restaurant_address.text = restaurant.address
 
@@ -55,5 +67,26 @@ class RestaurantActivity : AppCompatActivity() {
 
         }
 
+        initToolbar()
+    }
+
+
+    private fun initToolbar() {
+        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
+        toolbar.setNavigationIcon(R.drawable.ic_back_arrow)
+        toolbar.navigationIcon!!.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.title = restaurant.name
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+        } else {
+            Toast.makeText(applicationContext, item.title, Toast.LENGTH_SHORT).show()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
