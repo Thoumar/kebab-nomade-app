@@ -18,23 +18,75 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <TextView
-            android:id="@+id/txt_welcome"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
-            android:padding="20dp"
-            android:text="Hello Thoumar"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:textSize="30sp"
-            android:textStyle="italic"
+            android:orientation="vertical"
+            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txt_welcome_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Comment ca va "
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_welcome_main">
+
+                <TextView
+                    android:id="@+id/txt_welcome_qualif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="beau gosse"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/txt_welcome_ponctuation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="\?"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp"
+                    android:textStyle="italic" />
+
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <EditText
             android:id="@+id/edit_text_searchbar"
+            android:drawablePadding="32dp"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"
@@ -42,12 +94,19 @@
             android:layout_marginEnd="32dp"
             android:background="@drawable/bg_round_button_shape_dark"
             android:drawableEnd="@drawable/ic_search"
+            android:focusable="false"
             android:drawableTint="@android:color/white"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_welcome" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <TextView
+            android:drawableStart="@drawable/ic_article"
+            android:drawablePadding="10dp"
+            android:drawableTint="@android:color/white"
             android:id="@+id/txt_articles_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,7 +116,7 @@
             android:paddingTop="20dp"
             android:paddingEnd="10dp"
             android:paddingBottom="10dp"
-            android:text="Derniers articles"
+            android:text="Derniers articles publiés"
             android:textAlignment="textStart"
             android:textColor="@android:color/white"
             android:textSize="18sp"
@@ -69,23 +128,30 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/articlesRcView"
             android:layout_width="0dp"
-            android:layout_height="250dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_articles_title" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_articles_title"
+            tools:itemCount="3"
+            tools:listitem="@layout/article_horizontal_item" />
 
 
         <TextView
+            android:layout_marginTop="16dp"
+            android:drawableStart="@drawable/ic_restaurant"
+            android:drawablePadding="10dp"
             android:id="@+id/txt_restaurant_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableTint="@android:color/white"
             android:fontFamily="@font/poppins_medium"
             android:paddingStart="10dp"
             android:paddingTop="20dp"
             android:paddingEnd="10dp"
             android:paddingBottom="10dp"
-            android:text="Restaurants ajoutés"
+            android:text="Restaurants récemment ajoutés"
             android:textAlignment="textStart"
             android:textColor="@android:color/white"
             android:textSize="18sp"
@@ -97,15 +163,21 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/restaurantsRcView"
             android:layout_width="0dp"
-            android:layout_height="250dp"
+            android:layout_height="wrap_content"
+            android:clipToPadding="true"
+            android:isScrollContainer="false"
+            android:nestedScrollingEnabled="false"
+            android:paddingBottom="250dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_restaurant_title" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_restaurant_title"
+            tools:itemCount="3"
+            tools:listitem="@layout/restaurant_vertical_item" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+</ScrollView>
 
 

@@ -2,13 +2,12 @@ package com.thoumar.kebabnomade.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thoumar.kebabnomade.R
@@ -30,21 +29,25 @@ class HomeFragment : Fragment() {
     private lateinit var articlesViewModel: ArticlesViewModel
     private lateinit var restaurantsViewModel: RestaurantsViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    class Message(var title: String, var qualif: String, var ponctuation: String)
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val v = inflater.inflate(R.layout.fragment_home, container, false)
 
         // View Model
-        articlesViewModel = ViewModelProvider(this).get(ArticlesViewModel::class.java)
-        restaurantsViewModel = ViewModelProvider(this).get(RestaurantsViewModel::class.java)
+        val articlesViewModel: ArticlesViewModel by viewModels()
+        val restaurantsViewModel: RestaurantsViewModel by viewModels()
 
-        val articlesLiveData: LiveData<List<Article>> = articlesViewModel.getArticles()
-        val restaurantsLiveData: LiveData<List<Restaurant>> = restaurantsViewModel.getRestaurants()
-
-        articlesLiveData.observe(this.requireActivity(), {
+        articlesViewModel.getArticles().observe(requireActivity(), {
             articles = it
             setArticles(v.articlesRcView)
         })
-        restaurantsLiveData.observe(this.requireActivity(), {
+
+        restaurantsViewModel.getRestaurants().observe(requireActivity(), {
             restaurants = it
             setRestaurants(v.restaurantsRcView)
         })
@@ -58,11 +61,18 @@ class HomeFragment : Fragment() {
     }
 
     private fun setWelcomeMessage(v: View) {
-        // Generate a random warm welcome to the user
-        val messages = arrayListOf("Salut chef !", "Comment ça va beau gosse ?", "Tu prends quoi aujourd'hui chef ?")
-        v.txt_welcome.text = messages.shuffled().take(1)[0]
-    }
+        val titles = arrayListOf("Comment ça va ", "Bonjour ")
+        val qualifs = arrayListOf(" beau gosse ", " chef ")
+        val ponctuations = arrayListOf("? ", "! ")
 
+        val randomTitle = titles.shuffled().take(1)[0]
+        val randomQualifs = qualifs.shuffled().take(1)[0]
+        val randomPonctuation = ponctuations.shuffled().take(1)[0]
+
+        v.txt_welcome_main.text = randomTitle
+        v.txt_welcome_qualif.text = randomQualifs
+        v.txt_welcome_ponctuation.text = randomPonctuation
+    }
 
     private fun setArticles(rc: RecyclerView) = rc.apply {
         layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
@@ -77,15 +87,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun setRestaurants(rc: RecyclerView) = rc.apply {
-        layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL, false)
-        adapter = RestaurantsAdapter("vertical", restaurants) { restaurant -> onRestaurantClick(restaurant) }
+        layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+        adapter = RestaurantsAdapter(
+            "vertical",
+            restaurants
+        ) { restaurant -> onRestaurantClick(restaurant) }
     }
 
     private fun onRestaurantClick(restaurant: Restaurant) {
         Toast.makeText(requireContext(), restaurant.name, Toast.LENGTH_LONG).show()
         val intent = Intent(activity, RestaurantActivity::class.java)
-        intent.putExtra("Restaurant", restaurant)
+        intent.putExtra("RESTAURANT", restaurant)
         startActivity(intent)
     }
-
 }

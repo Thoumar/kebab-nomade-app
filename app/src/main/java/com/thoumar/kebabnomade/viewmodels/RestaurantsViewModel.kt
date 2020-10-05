@@ -8,6 +8,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.thoumar.kebabnomade.entities.Restaurant
 
+
 class RestaurantsViewModel : ViewModel() {
 
     val db = Firebase.firestore
@@ -19,6 +20,8 @@ class RestaurantsViewModel : ViewModel() {
         }
     }
 
+    var filterTextAll = MutableLiveData<String>()
+
     fun getRestaurants(): LiveData<List<Restaurant>> {
         return restaurants
     }
@@ -27,7 +30,9 @@ class RestaurantsViewModel : ViewModel() {
         db.collection("restaurants")
             .get()
             .addOnSuccessListener { documents ->
-                restaurants.value = documents.toObjects(Restaurant::class.java)
+                val allRestaurants = documents.toObjects(Restaurant::class.java)
+                restaurants.value = allRestaurants
+
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)

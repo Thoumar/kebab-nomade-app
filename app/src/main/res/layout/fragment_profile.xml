@@ -2,9 +2,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/profile_view_container"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/colorBackgroundDark"
     tools:context=".fragments.HomeFragment">
 
@@ -12,59 +12,73 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/image_view_profile_picture"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flexboxLayout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:alignItems="center"
+            app:flexDirection="column"
+            app:justifyContent="space_around"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/text_view_display_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Thomas Oumar"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/image_view_profile_picture"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/image_view_profile_picture"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
 
-        <Button
-            android:id="@+id/btn_menu"
-            android:layout_width="85dp"
-            android:layout_height="52dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:text="Menu"
+            <TextView
+                android:id="@+id/text_view_display_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Thomas Oumar"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                tools:layout_editor_absoluteX="134dp"
+                tools:layout_editor_absoluteY="142dp" />
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:alignItems="center"
+            app:justifyContent="space_around"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_view_profile_picture" />
+            app:layout_constraintTop_toBottomOf="@+id/flexboxLayout">
 
-        <Button
-            android:id="@+id/btn_sign_out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:text="Déconnexion"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_menu" />
+            <Button
+                android:id="@+id/btn_sign_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_button_shape_dark"
+                android:drawableStart="@drawable/ic_sign_out"
+                android:drawableTint="@android:color/white"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="Déconnexion"
+                android:textColor="@android:color/white" />
 
-        <Button
-            android:id="@+id/btn_delete_account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="32dp"
-            android:text="Suppression"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_sign_out" />
+            <Button
+                android:id="@+id/btn_delete_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_button_shape_dark"
+                android:drawableStart="@drawable/ic_trash"
+                android:drawableTint="@android:color/white"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="Suppression"
+                android:textColor="@android:color/white"
+                tools:layout_editor_absoluteX="240dp"
+                tools:layout_editor_absoluteY="32dp" />
+
+        </com.google.android.flexbox.FlexboxLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
